@@ -7,7 +7,9 @@
 
 */
 
-(function (window) {
+(function () {
+
+  var root = this;
 
   var StateMachine = {
 
@@ -191,12 +193,19 @@
 
   //===========================================================================
 
-  if ("function" === typeof define) {
-    define(function(require) { return StateMachine; });
-  }
-  else {
-    window.StateMachine = StateMachine;
-  }
+  if (typeof exports !== 'undefined') {
+    if (typeof module !== 'undefined' && module.exports) {
+      exports = module.exports = StateMachine;
+    }
+    exports.StateMachine = StateMachine;
+  } else {
+    if ("function" === typeof define) {
+      define(function(require) { return StateMachine; });
+    }
+    else {
+      window.StateMachine = StateMachine;
+    }
+  }  
 
-}(this));
+}.call(this));
 
